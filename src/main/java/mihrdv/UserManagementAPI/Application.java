@@ -10,11 +10,4 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	private UserRepository userRepository;
-
-	public User createUser(User user){
-		return  userRepository.save(user);
-	}
-
-	
 }
