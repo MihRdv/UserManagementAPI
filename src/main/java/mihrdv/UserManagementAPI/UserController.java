@@ -17,6 +17,11 @@ public class UserController {
         return userService.changeUsername(id,newUsername);
     }
 
+    @PutMapping("/changePassword")
+    public User changePassword(@RequestParam Long id, @RequestParam String newPassword) {
+        return userService.changePassword(id,newPassword);
+    }
+
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);

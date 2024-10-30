@@ -13,6 +13,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User changePassword(Long id, String newPassword){
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+
+            user.setPassword(newPassword);
+            return userRepository.save(user);
+        } else {
+            throw new EntityNotFoundException("User not found with ID: " + id);
+        }
+    }
+
     public User changeUsername(Long id, String newUsername){
         Optional<User> optionalUser = userRepository.findById(id);
 
