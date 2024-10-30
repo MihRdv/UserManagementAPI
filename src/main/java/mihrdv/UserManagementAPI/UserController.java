@@ -12,6 +12,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PutMapping("/changeUsername")
+    public User changeUsername(@RequestParam Long id, @RequestParam String newUsername){
+        return userService.changeUsername(id,newUsername);
+    }
+
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
@@ -27,18 +32,24 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/byId/{id}")
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteUserByID(id);
     }
 
-    @DeleteMapping("/username/{username}")
+    @DeleteMapping("/byUsername/{username}")
     public void deleteUserByUsername(@PathVariable String username) {
         userService.deleteUserByUsername(username);
     }
 
-    @DeleteMapping("/email/{email}")
+    @DeleteMapping("/byEmail/{email}")
     public void deleteUserByEmail(@PathVariable String email) {
         userService.deleteUserByEmail(email);
+    }
+
+
+    @DeleteMapping("/clearAll")
+    public void clearDatabase(){
+        userService.deleteAllUsers();
     }
 }

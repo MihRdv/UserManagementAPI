@@ -13,6 +13,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User changeUsername(Long id, String newUsername){
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (userRepository.findByUsername(newUsername) != null) {
+            throw new IllegalArgumentException("Username already exists: " + newUsername);
+        }
+
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+
+            user.setUsername(newUsername);
+            return userRepository.save(user);
+        } else {
+            throw new EntityNotFoundException("User not found with ID: "+ id);
+        }
+    }
+
     public User createUser(User user){
         return userRepository.save(user);
     }
@@ -24,6 +41,10 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    public void deleteAllUsers(){
+        userRepository.deleteAll();
     }
 
     public void deleteUserByID(Long id){
