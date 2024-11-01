@@ -17,6 +17,11 @@ public class UserController {
         return userService.changeUsername(id,newUsername);
     }
 
+    @PutMapping("/changeEmail")
+    public User changeEmail(@RequestParam Long id, @RequestParam String newEmail){
+        return userService.changeEmail(id,newEmail);
+    }
+
     @PutMapping("/changePassword")
     public User changePassword(@RequestParam Long id, @RequestParam String newPassword) {
         return userService.changePassword(id,newPassword);

@@ -13,6 +13,23 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User changeEmail(Long id, String newEmail){
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(userRepository.findByEmail(newEmail).isPresent()){
+            throw new IllegalArgumentException("Email already exists: "+ newEmail);
+        }
+
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+
+            user.setEmail(newEmail);
+            return userRepository.save(user);
+        } else {
+            throw new EntityNotFoundException("User not found with ID: "+id);
+        }
+    }
+
     public User changePassword(Long id, String newPassword){
         Optional<User> optionalUser = userRepository.findById(id);
 
@@ -79,7 +96,6 @@ public class UserService {
             throw new EntityNotFoundException("User not found with username: " + username);
         }
     }
-
 
     public void deleteUserByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
