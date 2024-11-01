@@ -38,23 +38,27 @@ public class UserController {
     }
 
     @DeleteMapping("/byId/{id}")
-    public void deleteUserById(@PathVariable Long id) {
+    public String deleteUserById(@PathVariable Long id) {
         userService.deleteUserByID(id);
+        return "Successfully deleted user by ID: " + id;
     }
 
-    @DeleteMapping("/byUsername/{username}")
-    public void deleteUserByUsername(@PathVariable String username) {
+    @DeleteMapping("/username/{username}")
+    public String deleteUserByUsername(@PathVariable String username) {
         userService.deleteUserByUsername(username);
+        return "Successfully deleted user by username: " + username;
     }
 
-    @DeleteMapping("/byEmail/{email}")
-    public void deleteUserByEmail(@PathVariable String email) {
+    @DeleteMapping("/email/{email}")
+    public String deleteUserByEmail(@PathVariable String email) {
         userService.deleteUserByEmail(email);
+        return "Successfully deleted user by email: " + email;
     }
 
 
     @DeleteMapping("/clearAll")
-    public void clearDatabase(){
+    public String clearDatabase(){
         userService.deleteAllUsers();
+        return "Successfully deleted all users from database";
     }
 }
