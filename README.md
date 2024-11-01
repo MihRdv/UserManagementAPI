@@ -28,7 +28,6 @@ The User Management API is a RESTful service built with Spring Boot, designed to
 - Create a User: POST /api/users
 - Get All Users: GET /api/users
 - Get User by ID: GET /api/users/{id}
-- Change User ID: PUT /api/users/changeId?oldId={oldId}&newId={newId}
 - Change Username: PUT /api/users/changeUsername?id={id}&newUsername={newUsername}
 - Change Password: PUT /api/users/changePassword?id={id}&newPassword={newPassword}
 - Delete User by ID: DELETE /api/users/{id}
