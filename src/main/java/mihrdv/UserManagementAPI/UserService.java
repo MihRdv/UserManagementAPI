@@ -29,7 +29,7 @@ public class UserService {
     public User changeUsername(Long id, String newUsername){
         Optional<User> optionalUser = userRepository.findById(id);
 
-        if (userRepository.findByUsername(newUsername) != null) {
+        if (userRepository.findByUsername(newUsername).isPresent()) {
             throw new IllegalArgumentException("Username already exists: " + newUsername);
         }
 
@@ -90,19 +90,6 @@ public class UserService {
             throw new EntityNotFoundException("User not found with email: " + email);
         }
     }
-
-
-    public void deleteUserByDetails(String username, String email) {
-        Optional<User> user = userRepository.findByUsernameAndEmail(username, email);
-
-        if (user.isPresent()) {
-            userRepository.delete(user.get()); // Get the User object from Optional and delete
-        } else {
-            // Optionally throw an exception or handle the case where the user is not found
-            throw new EntityNotFoundException("User not found with username: " + username + " and email: " + email);
-        }
-    }
-
 
 
 }
